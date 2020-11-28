@@ -1,1 +1,1 @@
-web: gunicorn daas_demo.wsgi
+web: gunicorn CookITServer.wsgi
