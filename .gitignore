@@ -1,2 +1,3 @@
 CookIT/__pycache__/*.py[cod]
 CookITServer/__pycache__/*.py[cod]
+staticfiles
