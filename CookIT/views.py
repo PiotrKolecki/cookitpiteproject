@@ -4,4 +4,5 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the CookIT index.")
+    test_param = "Hello"
+    return render(request, 'base.html', {'test_param': test_param})
