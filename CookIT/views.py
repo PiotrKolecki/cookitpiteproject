@@ -42,7 +42,7 @@ def loginRegisterUI(request):
                     return render(request, 'loginRegister.html', {'validationMsg': 'Registered new user'})
 
         elif request.method == "GET":
-            return render(request, 'loginRegister.html', {'validationMsg': 'You tried to login using GET. Not nice of you'})
+            return render(request, 'loginRegister.html')
 
 def account(request):
     if request.COOKIES.get('userSession'): 
