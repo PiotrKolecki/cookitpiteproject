@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Logowanie i Rejestracja{% endblock %}
+
+{% load static %}
+{% block additionalStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/loginRegister.css' %}">{% endblock %}
+
+{% block content %}
+    <div id="loginRegisterWrapper">
+       <div class="errorMsg">{{ validationMsg }}</div>
+       <div class="loginWrapper">
+         <h2 class="sectionTitile">Zaloguj się</h2>
+         <form name="loginForm" method="post">{% csrf_token %}
+            <input name="login" placeholder="Login" required class="input" value="">
+            <input name="password" placeholder="Hasło" required class="input" value="" type="password">
+            <button type="button" class="submitInput" onclick="validateLoginForm()">Zaloguj</button>
+         </form>
+       </div>
+       <span class="separator"></span>
+       <div class="registerWrapper">
+         <h2 class="sectionTitile">Zarejestruj się</h2>
+         <form name="registerForm" method="post">{% csrf_token %}
+            <input name="newLogin" placeholder="Login" required class="input" value="">
+            <input name="newPassword" placeholder="Hasło" required class="input" value="" type="password">
+            <input name="repeatPassword" placeholder="Powtórz hasło" required class="input" value="" type="password">
+            <button type="button" class="submitInput" onclick="validateRegisterForm()">Zarejestruj</button>
+         </form>
+       </div>
+    </div>
+    <script src="{% static 'scripts/loginRegisterValidators.js' %}"></script>
+{% endblock %}
+

@@ -71,6 +71,12 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    'static/stylesSheets',
+    'static/images',
+]
+
 WSGI_APPLICATION = 'CookITServer.wsgi.application'
 
 

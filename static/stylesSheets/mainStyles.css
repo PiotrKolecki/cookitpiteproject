@@ -1,0 +1,110 @@
+body {
+   font-family: Montserrat;
+   color: rgb(26, 26, 26);
+   margin: 0;
+   padding: 0;
+}
+
+#topBar .logoLoginWrapper {
+   display: flex;
+   padding: 0px 20% 0px 15%;
+   margin: 8px 0px;
+   align-items: center;
+   color: rgb(26, 26, 26);
+}
+
+#topBar .loginButton, .accountButton, .logoutButton {
+   padding: 8px 16px;
+   color: rgb(77, 77, 77);
+   cursor: pointer;
+   border: 1px solid white;
+   text-decoration: none;
+   font-size: 16px;
+   background: none;
+   border-radius: none !important;
+   outline: none !important;
+   text-decoration: none !important;
+}
+
+#topBar .accountButton {
+   margin-right: 16px;
+}
+
+#topBar .loginButton:hover,  .accountButton:hover, .logoutButton:hover {
+   border: 1px solid rgb(39, 59, 122);
+   color: rgb(39, 59, 122);
+}
+
+#topBar .loginButton:active,  .accountButton:active, .logoutButton:active {
+   border: 1px solid rgb(39, 59, 122);
+   background: rgb(39, 59, 122);
+   color: white;
+}
+
+#topBar .navWrapper {
+   padding: 1px 10%;
+   background: rgb(238, 238, 238);
+   box-shadow: rgba(0, 0, 0, 0.64) 0px 2px 8px -5px;
+   display: flex;
+}
+
+#topBar .navLink {
+   display: flex;
+   flex: 1 1 0px;
+   align-items: center;
+   justify-content: center;
+   margin-right: 8px;
+   color: rgb(77, 77, 77);
+   cursor: pointer;
+   text-decoration: none;
+   height: 42px;
+   padding-left: 8px;
+}
+
+#topBar .navLink:hover, .navLink:active {
+   box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 2px 1px, rgba(0, 0, 0, 0.16) 0px 4px 8px 0px;
+   color: rgb(39, 59, 122);
+}
+
+#topBar .navLink img {
+   margin-top: -2px;
+}
+
+#topBar .navLink h3 {
+   margin: 0px 16px;
+   font-size: 18px;
+}
+
+.pageTitle {
+   display: flex;
+   color: rgb(0, 39, 66);
+   font-size: 32px;
+   margin: 0px 0px 0px 48px;
+   align-items: center;
+   flex-grow: 1;
+}
+
+#pageWrapper {
+   margin: 16px 20% 0;
+}
+
+#footer {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-weight: 600;
+   border-top: 1px solid rgb(221, 221, 221);
+   padding: 16px 0px;
+   font-size: 13px;
+   line-height: 20px;
+   margin: 0px;
+}
+
+#footer a, a:visited {
+   text-decoration: none;
+   color: rgb(0, 39, 66);
+}
+
+#footer a:hover, a:active {
+   text-decoration: underline;
+}
