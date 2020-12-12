@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from urllib.parse import parse_qs
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 def index(request):
     test_param = "Hello"
@@ -14,20 +17,32 @@ def loginRegisterUI(request):
 
         if request.method == "POST":
             if (decodedParams.keys() >= {"login", "password"}):
-                # FIXME:
-                # after check if user is in dataBase redirect to login page on error with error msg
-                # return render(request, 'loginRegister.html', {'validationMsg': 'Login'})
-                # or set cookie with expire date and redirect to account
-                response = HttpResponseRedirect('/CookIT/account')
-                response.set_cookie(key="userSession", value="sameValueAsInDB")
-                return response
+                username = request.POST['login']
+                password = request.POST['password']
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    response = HttpResponseRedirect('/CookIT/account')
+                    response.set_cookie(key="userSession", value="sameValueAsInDB")
+                    return response
+                else:
+                    validationMsg = "credentials invalid"
+                    return render(request, 'loginRegister.html', {'validationMsg': validationMsg})
+           
             elif (decodedParams.keys() >= {"newLogin", "newPassword", "repeatPassword"}):
-                # FIXME:
-                # after success user add set cookie and redirect to account 
-                return render(request, 'loginRegister.html', {'validationMsg': 'Register'})
+                username = request.POST['newLogin']
+                password = request.POST['newPassword']
+                password_repeat = request.POST['repeatPassword']
+
+                if(password != password_repeat):
+                    return render(request, 'loginRegister.html', {'validationMsg': 'Passwords don\'t match'})
+                else:
+                    user = User.objects.create_user(username=username, password=password)
+                    user.save()
+                    return render(request, 'loginRegister.html', {'validationMsg': 'Registered new user'})
 
         elif request.method == "GET":
-            return render(request, 'loginRegister.html')
+            return render(request, 'loginRegister.html', {'validationMsg': 'You tried to login using GET. Not nice of you'})
 
 def account(request):
     if request.COOKIES.get('userSession'): 
