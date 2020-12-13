@@ -26,7 +26,7 @@ def loginRegisterUI(request):
                     response.set_cookie(key="userSession", value="sameValueAsInDB")
                     return response
                 else:
-                    validationMsg = "credentials invalid"
+                    validationMsg = "Użytkownik o podanych danych nie istnieje"
                     return render(request, 'loginRegister.html', {'validationMsg': validationMsg})
            
             elif (decodedParams.keys() >= {"newLogin", "newPassword", "repeatPassword"}):
@@ -35,11 +35,11 @@ def loginRegisterUI(request):
                 password_repeat = request.POST['repeatPassword']
 
                 if(password != password_repeat):
-                    return render(request, 'loginRegister.html', {'validationMsg': 'Passwords don\'t match'})
+                    return render(request, 'loginRegister.html', {'validationMsg': 'Podane hasła nie są zgodne'})
                 else:
                     user = User.objects.create_user(username=username, password=password)
                     user.save()
-                    return render(request, 'loginRegister.html', {'validationMsg': 'Registered new user'})
+                    return render(request, 'loginRegister.html', {'successMsg': 'Konto zostało utworzone'})
 
         elif request.method == "GET":
             return render(request, 'loginRegister.html')

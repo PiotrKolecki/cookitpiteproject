@@ -8,6 +8,7 @@
 {% block content %}
     <div id="loginRegisterWrapper">
        <div class="errorMsg">{{ validationMsg }}</div>
+       <div class="successMsg">{{ successMsg }}</div>
        <div class="loginWrapper">
          <h2 class="sectionTitile">Zaloguj się</h2>
          <form name="loginForm" method="post">{% csrf_token %}
