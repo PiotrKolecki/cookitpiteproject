@@ -16,7 +16,7 @@ class Recipe(models.Model):
 
 class Comment(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.SET_NULL)
-    recipe = models.ForeignKey(recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     text = models.CharField(max_length=500)
     rating = models.FloatField()
    
