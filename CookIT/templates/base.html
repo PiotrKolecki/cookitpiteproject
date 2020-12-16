@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}CookIT{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'stylesSheets/mainStyles.css' %}">
+    {% block additionalStylesSheet %}{% endblock %}
+</head>
+
+<body>
+    <div id="topBar">
+        <div class="logoLoginWrapper">
+            <!-- FIXME: Change to proper link-->
+            <a href="/CookIT"><img width=72 height=72 src="{% static 'images/logo.png' %}" /></a>
+            <h2 class="pageTitle">CookIT</h2>
+            <!-- Correct buttons will be displayed after page load -->
+            <div class="navButtonsWrapper"></div>
+        </div>
+        <div class="navWrapper">
+            <a class="navLink" href="/CookIT">
+                <img width=24 height=24 src="{% static 'images/toast.png' %}" />
+                <h3>Home</h3>
+            </a>
+            <a class="navLink" href="/admin/">
+                <img width=24 height=24 src="{% static 'images/toast.png' %}" />
+                <h3>admin</h3>
+            </a>
+            <a class="navLink" href="/CookIT/login/">
+                <img width=24 height=24 src="{% static 'images/toast.png' %}" />
+                <h3>loginAndRegister</h3>
+            </a>
+        </div>
+    </div>
+
+    <div id="pageWrapper">
+        <div id="content">
+            {{ test_param }}
+            {% block content %}{% endblock %}
+        </div>
+
+        <div id="footer">
+            All rights reserved 2020
+            <div class="designers">
+                Designed and Coded by
+                <a href="https://github.com/PiotrKolecki" target="_blank">Piotr Kolecki</a>
+                 | 
+                <a href="https://github.com/PawelKepka" target="_blank">Paweł Kępka</a>
+                 | 
+                <a href="https://github.com/pasik97" target="_blank">Konrad Pasik</a>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'scripts/topBarButtons.js' %}"></script>
+</body>
+</html>
