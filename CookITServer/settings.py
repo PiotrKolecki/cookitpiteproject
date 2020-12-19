@@ -84,21 +84,23 @@ WSGI_APPLICATION = 'CookITServer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wqqregha',
-        'USER': 'wqqregha',
-        'PASSWORD': 'Ozuwiozl0AI4oEMVXkV537oLSEosBcPC',
-        'HOST': 'rogue.db.elephantsql.com',
-        'PORT': '',
-    },
-}
-
 if 'test' in sys.argv:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        },
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'wqqregha',
+            'USER': 'wqqregha',
+            'PASSWORD': 'Ozuwiozl0AI4oEMVXkV537oLSEosBcPC',
+            'HOST': 'rogue.db.elephantsql.com',
+            'PORT': '',
+        },
     }
 
 
