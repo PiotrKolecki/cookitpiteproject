@@ -22,6 +22,5 @@ class AccountPageTest(SimpleTestCase):
    def test_user_without_cookie(self):
       self.client.cookies = SimpleCookie({})
       response = self.client.get('/CookIT/account/')
-      print(response)
       self.assertEqual(response.status_code, 302)
       self.assertEqual(response.url, '/CookIT/login')
