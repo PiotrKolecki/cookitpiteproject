@@ -14,6 +14,7 @@ from pathlib import Path
 
 import os
 import django_heroku
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,17 +84,37 @@ WSGI_APPLICATION = 'CookITServer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wqqregha',
-        'USER': 'wqqregha',
-        'PASSWORD': 'Ozuwiozl0AI4oEMVXkV537oLSEosBcPC',
-        'HOST': 'rogue.db.elephantsql.com',
-        'PORT': '',
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        },
     }
-}
 
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'wqqregha',
+            'USER': 'wqqregha',
+            'PASSWORD': 'Ozuwiozl0AI4oEMVXkV537oLSEosBcPC',
+            'HOST': 'rogue.db.elephantsql.com',
+            'PORT': '',
+        },
+    }
+
+if os.environ.get('GITHUB_WORKFLOW'):
+    DATABASES = {
+        'default': {
+           'ENGINE': 'django.db.backends.postgresql',
+           'NAME': 'github_actions',
+           'USER': 'postgres',
+           'PASSWORD': 'postgres',
+           'HOST': '127.0.0.1',
+           'PORT': '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
