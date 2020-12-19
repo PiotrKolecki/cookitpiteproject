@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 def index(request):
-    test_param = "Hello"
-    return render(request, 'base.html', {'test_param': test_param})
+    header_param = "Hello"
+    return render(request, 'base.html', {'header_param': header_param})
 
 def loginRegisterUI(request):
     if request.COOKIES.get('userSession'):
@@ -46,7 +46,16 @@ def loginRegisterUI(request):
 
 def account(request):
     if request.COOKIES.get('userSession'): 
-        test_param = "Account"
-        return render(request, 'base.html', {'test_param': test_param})
+        header_param = "Account"
+        current_user = request.user
+        return render(request, 'account.html', {
+            'header_param': header_param,
+            'username': current_user.username,
+            'last_login': current_user.last_login,
+            'first_name': current_user.first_name,
+            'last_name': current_user.last_name,
+            'email': current_user.email,
+            'date_joined': current_user.date_joined
+        })
     else:
         return HttpResponseRedirect('/CookIT/login')
