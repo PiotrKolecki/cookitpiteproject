@@ -1,0 +1,84 @@
+#loginRegisterWrapper {
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   flex-wrap: wrap;
+}
+
+.errorMsg {
+   margin: 0px auto;
+   font-size: 18px;
+   font-weight: 400;
+   color: rgb(206, 0, 0);
+   width: 100%;
+   text-align: center;
+}
+
+.successMsg {
+   margin: 0px auto;
+   font-size: 18px;
+   font-weight: 400;
+   color: green;
+   width: 100%;
+   text-align: center;
+}
+
+.separator {
+   min-width: 1px;
+   background: rgb(221, 221, 221);
+   height: 65vh;
+   margin: 32px 0px;
+}
+
+.sectionTitile {
+   color: rgb(0, 39, 66);
+   font-size: 24px;
+   margin: 24px 0px;
+   text-align: center;
+}
+
+.input {
+   min-width: 250px;
+   margin-bottom: 24px;
+   font-size: 16px;
+   padding: 4px 6px;
+   border-top: none;
+   border-right: none;
+   border-left: none;
+   border-image: initial;
+   color: rgb(26, 26, 26);
+   border-bottom: 1px solid rgb(170, 170, 170);
+   display: block;
+}
+
+.input:focus {
+   outline: none;
+   color: rgb(0, 39, 66);
+   border-bottom: 1px solid rgb(0, 39, 66);
+}
+
+.submitInput {
+   display: block;
+   color: rgb(77, 77, 77);
+   cursor: pointer;
+   text-decoration: none;
+   background: none;
+   border: 1px solid white;
+   font-family: Montserrat;
+   font-size: 14px;
+   padding: 4px 12px;
+   margin: 0px auto;
+}
+
+.submitInput:hover, .submitInput:focus {
+   outline: none;
+   border: 1px solid rgb(39, 59, 122);
+   color: rgb(39, 59, 122);
+}
+
+.submitInput:active {
+   outline: none;
+   border: 1px solid rgb(39, 59, 122);
+   background: rgb(39, 59, 122);
+   color: white
+}
