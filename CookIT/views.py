@@ -4,10 +4,10 @@ from urllib.parse import parse_qs
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
+from . import models
 
 def index(request):
-    header_param = "Hello"
-    return render(request, 'base.html', {'header_param': header_param})
+    return render(request, 'home.html')
 
 def loginRegisterUI(request):
     if request.COOKIES.get('userSession'):
@@ -46,10 +46,8 @@ def loginRegisterUI(request):
 
 def account(request):
     if request.COOKIES.get('userSession'): 
-        header_param = "Account"
         current_user = request.user
-        return render(request, 'account.html', {
-            'header_param': header_param,
+        return render(request, 'userIdentity.html', {
             'username': current_user.username,
             'last_login': current_user.last_login,
             'first_name': current_user.first_name,
@@ -59,3 +57,37 @@ def account(request):
         })
     else:
         return HttpResponseRedirect('/CookIT/login')
+
+def category(request, id):
+    fetchedCategory = models.Category.objects.get(id=id)
+    fetchedRecipies = models.Recipe.objects.all().filter(category_id=id)
+
+    return render(request, 'category.html', {
+        'category_name': fetchedCategory.name,
+        'category_description': fetchedCategory.description,
+        'fetchedRecipies': fetchedRecipies,
+    })
+
+def recipe(request, id):
+    fetchedRecipie = models.Recipe.objects.get(id=id)
+    ingredients = fetchedRecipie.ingredients.split('|')
+    recipe_steps = fetchedRecipie.recipe_steps.split('|')
+    fetchedRecipie.ingredients = ingredients
+    fetchedRecipie.recipe_steps = recipe_steps
+
+    fetchedComments = models.Comment.objects.all().filter(recipe_id=id)
+
+    return render(request, 'recipe.html', {
+        'fetchedRecipie': fetchedRecipie,
+        'fetchedComments': fetchedComments,
+    })
+
+def addComment(request):
+    comment = request.POST.get('comment')
+    rating = request.POST.get('rating')
+    recipeId = request.POST.get('recipeId')
+
+    newComment = models.Comment(text=comment, rating=rating, recipe_id=recipeId)
+    newComment.save()
+
+    return HttpResponseRedirect('/CookIT/r-' + recipeId)

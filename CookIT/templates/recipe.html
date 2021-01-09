@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ fetchedRecipie.name }} - CookIT{% endblock %}
+
+{% load static %}
+{% block additionalStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/recipe.css' %}">{% endblock %}
+
+{% block content %}
+    <div id="recipeWrapper">
+      <h2 class="recipeTitle">{{ fetchedRecipie.name }}</h2>
+      <p class="recipeDescription">{{ fetchedRecipie.description }}</p>
+      <h3 class="subtitle">Składniki:</h3>
+      <ul class="ingredients">
+         {% for ingredient in fetchedRecipie.ingredients %}
+            <li class="ingredient">{{ ingredient }}</li>
+         {% endfor %}
+      </ul>
+      <h3 class="subtitle">Sposób przygotowania:</h3>
+      <div class="stepsWrapper">
+         {% for step in fetchedRecipie.recipe_steps %}
+         <p class="step">
+            <span class="number">{{forloop.counter}}</span>
+            {{step}}
+         </p>
+         {% endfor %}
+      </div>
+      <div class="commentsSection">
+         <h3 class="commentsTitle">Komentarze:</h3>
+         <a class="redirect" href="/CookIT/login">Zaloguj się, aby dodać komentarz</a>
+         <div class="addCommentWrapper hide">
+            <div class="addSection">
+               <div class="wrapper">
+                  <div class="leftColumn">
+                     <p class="leftColumnTitle">Wystaw ocenę</p>
+                     <select name="rating" class="chooseRating">
+                        <option class="option">1</option>
+                        <option class="option">2</option>
+                        <option class="option">3</option>
+                        <option class="option">4</option>
+                        <option class="option">5</option>
+                     </select>
+                  </div>
+                  <div class="rightColumn">
+                     <p class="rightColumnTitle">i podziel się swoją opinią:</p>
+                     <textarea name="comment" class="opinion"></textarea>
+                     <p class="validationMsg"></p>
+                  </div>
+               </div>
+               <button type="button" class="addComment" onclick="addNewComment({{fetchedRecipie.id}})">Dodaj komentarz</button>
+            </div>
+         </div>
+         <div class="commentsWrapper">
+            {% for comment in fetchedComments %}
+               <div class="commentContainer">
+                  <h4 class="rating">{{comment.rating}}/5</h4>
+                  <div class="comment">
+                     <p class="commentText">{{comment.text}}</p>
+                  </div>
+               </div>
+            {% endfor %}
+         </div>
+      </div>
+    </div>
+    <script src="{% static 'scripts/addComment.js' %}"></script>
+{% endblock %}
+

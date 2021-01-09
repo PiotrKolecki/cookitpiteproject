@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block additionalStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/home.css' %}">{% endblock %}
+
+{% block content %}
+    <div id="homeWrapper">
+       <img width=195 src="{% static 'images/cookMan.png' %}">
+       <h4 class="homeTitle">
+          CookIT - Cook Book
+         <span class="homeText">
+            - jest to internetowa książka kucharska. Wierzymy, że dzięki nam, przygotowując jedzienie dla siebie, swoich bliskich lub dla gości zrobisz to idealnie. Znajdź przepisy, które pozwolą Ci zrobić potrawy ze składników, które posiadasz. Dodawaj, komentuj oraz oceniaj przepisy.
+         </span>
+         </h4>
+    </div>
+{% endblock %}
+

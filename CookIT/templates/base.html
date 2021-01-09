@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}CookIT{% endblock %}</title>
+    <title>{% block title %}CookIT - Cook Book{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     {% load static %}
+    <link rel="icon" href="{% static 'images/logo.png' %}">
     <link rel="stylesheet" href="{% static 'stylesSheets/mainStyles.css' %}">
     {% block additionalStylesSheet %}{% endblock %}
 </head>
@@ -18,17 +19,29 @@
             <div class="navButtonsWrapper"></div>
         </div>
         <div class="navWrapper">
-            <a class="navLink" href="/CookIT">
+            <a class="navLink" href="/CookIT/c-1">
                 <img width=24 height=24 src="{% static 'images/toast.png' %}" />
-                <h3>Home</h3>
+                <h3>Śniadanie</h3>
             </a>
-            <a class="navLink" href="/admin/">
-                <img width=24 height=24 src="{% static 'images/toast.png' %}" />
-                <h3>admin</h3>
+            <a class="navLink" href="/CookIT/c-2">
+                <img width=24 height=24 src="{% static 'images/forkPlateKnife.png' %}" />
+                <h3>Obiad</h3>
             </a>
-            <a class="navLink" href="/CookIT/login/">
-                <img width=24 height=24 src="{% static 'images/toast.png' %}" />
-                <h3>loginAndRegister</h3>
+            <a class="navLink" href="/CookIT/c-3">
+                <img width=24 height=24 src="{% static 'images/salad.png' %}" />
+                <h3>Kolacja</h3>
+            </a>
+            <a class="navLink" href="/CookIT/c-4">
+                <img width=24 height=24 src="{% static 'images/iceCream.png' %}" />
+                <h3>Deser</h3>
+            </a>
+            <a class="navLink" href="/CookIT/c-5">
+                <img width=24 height=24 src="{% static 'images/fries.png' %}" />
+                <h3>Przekąska</h3>
+            </a>
+            <a class="navLink" href="/CookIT/c-6">
+                <img width=24 height=24 src="{% static 'images/other.png' %}" />
+                <h3>Inne</h3>
             </a>
         </div>
     </div>
