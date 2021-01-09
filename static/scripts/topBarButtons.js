@@ -1,7 +1,6 @@
 logout = () => {
    document.cookie = "userSession" +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-   // FIXME: set correct home page link
-   window.location.href = "/CookIT";
+   window.location.href = "/CookIT/logout";
 }
 
 getCookie = (cname) => {
@@ -29,7 +28,6 @@ setCorrectButtons =() => {
          <a class="loginButton" href="/CookIT/login/">Zaloguj się</a>
       `;
    } else {
-      // FIXME: set proper account link
       navButtonsWrapper.innerHTML = `
          <a class="accountButton" href="/CookIT/account">Twoje konto</a>
          <button class="logoutButton" onclick="logout()">Wyloguj</button>
