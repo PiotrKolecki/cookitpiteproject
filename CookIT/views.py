@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from . import models
 
+import logging
+
 def index(request):
     return render(request, 'home.html')
 
@@ -86,8 +88,9 @@ def addComment(request):
     comment = request.POST.get('comment')
     rating = request.POST.get('rating')
     recipeId = request.POST.get('recipeId')
+    user_id = request.user
 
-    newComment = models.Comment(text=comment, rating=rating, recipe_id=recipeId)
+    newComment = models.Comment(text=comment, rating=rating, recipe_id=recipeId, user_id=user_id)
     newComment.save()
 
     return HttpResponseRedirect('/CookIT/r-' + recipeId)
