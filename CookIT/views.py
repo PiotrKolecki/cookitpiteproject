@@ -45,8 +45,10 @@ def loginRegisterUI(request):
             return render(request, 'loginRegister.html')
 
 def logoutUI(request):
-    logout(request)
-    return render(request, 'loginRegister.html', {'successMsg': 'Wylogowano pomyślnie'})
+    if request.COOKIES.get('userSession'):
+        logout(request)
+        return render(request, 'loginRegister.html', {'successMsg': 'Wylogowano pomyślnie'})
+    return HttpResponseRedirect('/CookIT/')
 
 def account(request):
     if request.COOKIES.get('userSession'): 
