@@ -1,9 +1,23 @@
 {% extends 'base.html' %} 
+{% load static %}
+{% block additionalStylesSheet %}
+<link rel="stylesheet" href="{% static 'stylesSheets/account.css' %}">
+{% block accountPageStylesSheet %}
+{% endblock %}
+{% endblock %}
+
 {% block content %}
-<p>Username: {{ username }}</p>
-<p>First name: {{ first_name }}</p>
-<p>Last name: {{ last_name }}</p>
-<p>e-mail: {{ email }}</p>
-<p>Last login: {{ last_login }}</p>
-<p>Date joined: {{ date_joined }}</p>
+   <div id="account">
+      <div class="sidebar">
+         <a class="sidebarEl userData" href="/CookIT/account">Twoje dane</a>
+         <a class="sidebarEl editData" href="/">Edytuj dane</a>
+         <a class="sidebarEl addRecipe" href="/">Dodaj przepis</a>
+         <a class="sidebarEl userRecipes" href="/">Edytuj przepis</a>
+         <a class="sidebarEl userComments" href="/">Twoje komentarze</a>
+      </div>
+      <div class="mainContent">
+         {% block accountContent %}{% endblock %}
+      </div>
+   </div>
+   <script src="{% static 'scripts/accountSidebar.js' %}"></script>
 {% endblock %}

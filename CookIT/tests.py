@@ -13,8 +13,7 @@ class HomePageTest(SimpleTestCase):
    def test_home_page(self):
       response = self.client.get('/CookIT/')
       self.assertEqual(response.status_code, 200)
-      self.assertTemplateUsed(response, 'base.html')
-      self.assertContains(response, 'Hello')
+      self.assertTemplateUsed(response, 'home.html')
 
 class AccountPageTest(SimpleTestCase):
    def test_user_without_cookie(self):
@@ -31,8 +30,7 @@ class AccountPageTestAuthenticated(TestCase):
       self.client.login(username='test', password='test')
       response = self.client.get('/CookIT/account/')
       self.assertEqual(response.status_code, 200)
-      self.assertTemplateUsed(response, 'account.html')
-      self.assertContains(response, 'Account')
+      self.assertTemplateUsed(response, 'userIdentity.html')
 
 class CategoryTest(TestCase):
     def setUp(self):

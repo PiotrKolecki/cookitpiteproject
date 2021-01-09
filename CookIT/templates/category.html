@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category_name }} - CookIT{% endblock %}
+
+{% load static %}
+{% block additionalStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/category.css' %}">{% endblock %}
+
+{% block content %}
+    <div id="categoryWrapper">
+       <h2 class="categoryTitle">
+         {{ category_name }}
+      </h2>
+      <p class="categoryDescription">
+         {{ category_description }}
+      </p>
+      <div class="recipesWrapper">
+         {% for recipe in fetchedRecipies %}
+            <a class="recipe" href="/CookIT/r-{{ recipe.id }}">
+               <h3 class="recipeTitle">{{ recipe.name }}</h3>
+               <p class="recipeDescription">{{ recipe.description }}</p>
+            </a>
+         {% endfor %}
+      </div>
+    </div>
+{% endblock %}
+

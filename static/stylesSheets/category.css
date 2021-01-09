@@ -1,0 +1,50 @@
+#categoryWrapper {
+   margin-right: 20%;
+}
+
+.categoryTitle {
+   color: rgb(0, 39, 66);
+   font-size: 28px;
+   margin: 16px 0px 16px 24px;
+}
+
+.categoryDescription {
+   margin: 0px 0px 16px 24px;
+   color: rgb(26, 26, 26);
+   font-size: 16px;
+   line-height: 24px;
+}
+
+.recipe {
+   text-decoration: none;
+   color: rgb(26, 26, 26);
+   cursor: pointer;
+   display: block;
+   margin-bottom: 8px;
+   padding: 16px 24px;
+   cursor: pointer;
+}
+
+.recipe:hover {
+   box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 2px 1px, rgba(0, 0, 0, 0.16) 0px 4px 8px 0px;
+}
+
+.recipe:active {
+   text-decoration: none;
+}
+
+.recipe:hover .recipeTitle {
+   color: rgb(39, 59, 122);
+}
+
+.recipeTitle {
+   margin: 0px;
+   font-size: 18px;
+   color: rgb(26, 26, 26);
+}
+
+.recipeDescription {
+   margin: 16px 0px 4px;
+   font-size: 14px;
+   color: rgb(26, 26, 26);
+}

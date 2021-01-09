@@ -1,0 +1,22 @@
+{% extends 'account.html' %} 
+
+{% block title %}Twoje dane - CookIT{% endblock %}
+{% load static %}
+{% block accountPageStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/identity.css' %}">{% endblock %}
+
+{% block accountContent %}
+   <div id="identityWrapper">
+      <h3 class="header3">Login: <span class="bolded">{{ username }}</span></h3>
+      <h4 class="header4">Dane Personalne:</h4>
+      <div class="dataWrapper">
+         <p class="content">Imię: <span class="bolded">{{ first_name }}</span></p>
+         <p class="content">Nazwisko: <span class="bolded">{{ last_name }}</span></p>
+         <p class="content">E-mail: <span class="bolded">{{ email }}</span></p>
+      </div>
+      <h4 class="header4">Informacje o koncie:</h4>
+      <div class="dataWrapper">
+         <p class="content">Ostatnio zalogowany: <span class="bolded">{{ last_login }}</span></p>
+         <p class="content">Data utworzenia konta: <span class="bolded">{{ date_joined }}</span></p>
+      </div>
+   </div>
+{% endblock %}
