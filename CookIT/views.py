@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from urllib.parse import parse_qs
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from . import models
@@ -45,6 +45,12 @@ def loginRegisterUI(request):
 
         elif request.method == "GET":
             return render(request, 'loginRegister.html')
+
+def logoutUI(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return render(request, 'loginRegister.html', {'successMsg': 'Wylogowano pomyślnie'})
+    return HttpResponseRedirect('/CookIT/')
 
 def account(request):
     if request.COOKIES.get('userSession'): 
