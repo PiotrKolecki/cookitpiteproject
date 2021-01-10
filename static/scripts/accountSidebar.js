@@ -1,8 +1,8 @@
 boldSidebarElement = () => {
    const sidebarElements = {
       ['/CookIT/account/']: 'userData', 
+      ['/CookIT/account/edit']: 'editData', 
       // FIXME: Change to correct path after all views implementation
-      ['/']: 'editData', 
       ['/']: 'addRecipe', 
       ['/']: 'userRecipes', 
       ['/']: 'userComments', 
