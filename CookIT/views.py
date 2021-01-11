@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from . import models
 
+import logging
+
 def index(request):
     return render(request, 'home.html')
 
@@ -64,6 +66,30 @@ def account(request):
     else:
         return HttpResponseRedirect('/CookIT/login')
 
+def accountEdit(request):
+    current_user = request.user
+    if current_user.is_authenticated:
+        decodedParams = parse_qs(request.body.decode('utf-8'))
+        if request.method == "POST":
+            if (decodedParams.keys() >= {"first_name", "last_name", "email"}):
+                first_name = request.POST['first_name']
+                last_name = request.POST['last_name']
+                email = request.POST['email']
+                current_user.first_name = first_name
+                current_user.last_name = last_name
+                current_user.email = email
+                current_user.save()
+                return render(request, 'userEdit.html', {'successMsg': 'Poprawnie zapisano dane'})
+
+            else:
+                validationMsg = "Coś poszło nie tak. Spróbuj ponownie później."
+                return render(request, 'userEdit.html', {'validationMsg': validationMsg})
+
+        elif request.method == "GET":
+            return render(request, 'userEdit.html')
+    else:
+        return HttpResponseRedirect('/CookIT/login')
+
 def category(request, id):
     fetchedCategory = models.Category.objects.get(id=id)
     fetchedRecipies = models.Recipe.objects.all().filter(category_id=id)
@@ -92,8 +118,9 @@ def addComment(request):
     comment = request.POST.get('comment')
     rating = request.POST.get('rating')
     recipeId = request.POST.get('recipeId')
+    user_id = request.user
 
-    newComment = models.Comment(text=comment, rating=rating, recipe_id=recipeId)
+    newComment = models.Comment(text=comment, rating=rating, recipe_id=recipeId, user_id=user_id)
     newComment.save()
 
     return HttpResponseRedirect('/CookIT/r-' + recipeId)

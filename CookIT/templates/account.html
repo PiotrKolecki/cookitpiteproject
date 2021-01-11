@@ -10,13 +10,14 @@
    <div id="account">
       <div class="sidebar">
          <a class="sidebarEl userData" href="/CookIT/account">Twoje dane</a>
-         <a class="sidebarEl editData" href="/">Edytuj dane</a>
+         <a class="sidebarEl editData" href="/CookIT/account/edit">Edytuj dane</a>
          <a class="sidebarEl addRecipe" href="/">Dodaj przepis</a>
          <a class="sidebarEl userRecipes" href="/">Edytuj przepis</a>
          <a class="sidebarEl userComments" href="/">Twoje komentarze</a>
       </div>
       <div class="mainContent">
          {% block accountContent %}{% endblock %}
+         {% block accountEdit %}{% endblock %}
       </div>
    </div>
    <script src="{% static 'scripts/accountSidebar.js' %}"></script>
