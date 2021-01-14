@@ -46,21 +46,3 @@ addNewComment = (recipeId) => {
       request.send(formData);
    }
 }
-
-showAddSection =() => {
-   const sessionCookie = getCookie("userSession");
-   const redirectLink = document.getElementsByClassName("redirect")[0];
-   const addCommentWrapper = document.getElementsByClassName("addCommentWrapper")[0];
- 
-   if (!sessionCookie)  {
-      redirectLink.classList.remove('hide');
-      addCommentWrapper.classList.add('hide');
-   } else {
-      addCommentWrapper.classList.remove('hide');
-      redirectLink.classList.add('hide');
-   }
-}
-
-window.addEventListener('load', () => {
-   showAddSection();
-});

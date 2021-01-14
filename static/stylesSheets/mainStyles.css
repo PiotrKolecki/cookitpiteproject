@@ -88,6 +88,11 @@ body {
    margin: 32px 20% 0; 
 }
 
+#content {
+   min-height: calc(100vh - 241px);
+   display: flex;
+}
+
 #footer {
    display: flex;
    flex-direction: column;

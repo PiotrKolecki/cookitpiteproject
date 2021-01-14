@@ -12,7 +12,7 @@ def index(request):
     return render(request, 'home.html')
 
 def loginRegisterUI(request):
-    if request.COOKIES.get('userSession'):
+    if request.user.is_authenticated:
         return HttpResponseRedirect('/CookIT/account')
     else:
         decodedParams = parse_qs(request.body.decode('utf-8'))
@@ -106,6 +106,7 @@ def recipe(request, id):
     recipe_steps = fetchedRecipie.recipe_steps.split('|')
     fetchedRecipie.ingredients = ingredients
     fetchedRecipie.recipe_steps = recipe_steps
+    fetchedRecipie.name = fetchedRecipie.name.upper()
 
     fetchedComments = models.Comment.objects.all().filter(recipe_id=id)
 
@@ -124,3 +125,39 @@ def addComment(request):
     newComment.save()
 
     return HttpResponseRedirect('/CookIT/r-' + recipeId)
+
+def addRecipePage(request):
+    if request.user.is_authenticated:
+        return render(request, 'addRecipe.html')
+    else:
+        return HttpResponseRedirect('/CookIT/')
+    
+def addRecipePost(request):
+    categoriesDict = {
+        "Śniadanie": 1,
+        "Obiad": 2,
+        "Kolacja": 3,
+        "Deser": 4,
+        "Przekąska": 5,
+        "Inne": 6,
+    }
+
+    recipeName = request.POST.get('recipeName')
+    description = request.POST.get('description')
+    ingredients = request.POST.get('ingredients')
+    steps = request.POST.get('steps')
+    category = request.POST.get('category')
+    fetchedCategory = models.Category.objects.get(id=categoriesDict[category])
+    user_id = request.user
+
+    newRecipe = models.Recipe(
+        user_id=user_id,
+        category_id=fetchedCategory,
+        name=recipeName,
+        description=description,
+        ingredients=ingredients,
+        recipe_steps=steps,
+    )
+    newRecipe.save()
+
+    return render(request, 'addRecipe.html', {'successMsg': 'Przepis został zapisany'})

@@ -10,13 +10,13 @@
         <div class="successMsg">{{ successMsg }}</div>
         <span class="separator"></span>
         <h2 class="sectionTitile">Edytuj dane</h2>
-        <form name="editForm" method="post">{% csrf_token %}
+        <form class="editForm" name="editForm" method="post">{% csrf_token %}
             <input name="first_name" placeholder="* Imię" required class="input" value="">
             <input name="last_name" placeholder="* Nazwisko" required class="input" value="">
             <input name="email" placeholder="* E-mail" required class="input" value="">
+            <p class="content">* Pola wymagane</p>
             <button type="button" class="submitInput" onclick="validateEditForm()">Zapisz</button>
         </form>
-        <p class="content">* pola wymagane</p>
     </div>
     <script src="{% static 'scripts/accountEditValidators.js' %}"></script>
 {% endblock %}
