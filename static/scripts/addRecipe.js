@@ -187,3 +187,24 @@ addRecipe = () => {
       request.send(formData);
    }
 }
+
+clearForm = () => {
+   document.getElementsByClassName('errorMsg')[0].innerHTML = '';
+   document.getElementsByName('recipeName')[0].value = '';
+   document.getElementsByName('description')[0].value = '';
+
+   const ingredientsWrapper = document.getElementsByClassName('ingredientsWrapper')[0];
+   const stepsWrapper = document.getElementsByClassName('stepsWrapper')[0];
+
+   ingredients.forEach(ingredient => {
+      if(ingredientsWrapper.contains(ingredient)) {
+         ingredientsWrapper.removeChild(ingredient);
+      }
+   })
+
+   steps.forEach(step => {
+      if(stepsWrapper.contains(step)) {
+         stepsWrapper.removeChild(step);
+      }
+   })
+}
