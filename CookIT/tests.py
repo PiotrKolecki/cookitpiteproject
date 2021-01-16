@@ -9,7 +9,7 @@ from http.cookies import SimpleCookie
 from django.test import Client
 from django.contrib.auth.models import User
 
-class HomePageTest(SimpleTestCase):
+class HomePageTest(TestCase):
    def test_home_page(self):
       response = self.client.get('/CookIT/')
       self.assertEqual(response.status_code, 200)

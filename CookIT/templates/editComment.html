@@ -1,0 +1,39 @@
+{% extends 'account.html' %} 
+
+{% block title %}Twoje komentarze - CookIT{% endblock %}
+{% load static %}
+{% block accountPageStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/editComment.css' %}">{% endblock %}
+
+{% block accountContent %}
+   <div>
+      <div class="errorMsg">{{ validationMsg }}</div>
+      <div class="successMsg">{{ successMsg }}</div>
+      <h2 class="sectionTitile">Edytuj komentarz</h2>
+      <div class="editCommentWrapper">
+         <div class="editSection">
+            <div class="wrapper">
+               <div class="leftColumn">
+                  <p class="leftColumnTitle">Ocena:</p>
+                  <select name="rating" class="chooseRating">
+                     <option class="option">1</option>
+                     <option class="option">2</option>
+                     <option class="option">3</option>
+                     <option class="option">4</option>
+                     <option class="option">5</option>
+                  </select>
+               </div>
+               <div class="rightColumn">
+                  <p class="rightColumnTitle">Opinia:</p>
+                  <textarea name="comment" class="opinion">{{ fetchedComment.text }}</textarea>
+                  <p class="validationMsg"></p>
+               </div>
+            </div>
+            <button type="button" class="editComment" onclick="editComment({{fetchedComment.id}})">Zapisz zmiany</button>
+         </div>
+      </div>
+   </div>
+   <script>
+      var initialRating = "{{ fetchedComment.rating }}";
+   </script>
+   <script src="{% static 'scripts/editComment.js' %}"></script>
+{% endblock %}

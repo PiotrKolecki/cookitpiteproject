@@ -1,0 +1,29 @@
+{% extends 'account.html' %} 
+
+{% block title %}Twoje komentarze - CookIT{% endblock %}
+{% load static %}
+{% block accountPageStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/userComments.css' %}">{% endblock %}
+
+{% block accountContent %}
+   <div class="userCommentsWrapper">
+      <div class="errorMsg">{{ validationMsg }}</div>
+      <div class="successMsg">{{ successMsg }}</div>
+      <h2 class="sectionTitile">Twoje komentarze</h2>
+      <div class="commentsWrapper">
+         {% for comment in fetchedComments %}
+            <div class="comment">
+               <div class="commentContentWrapper">
+                  <h4 class="commentRating">{{ comment.rating }}/5</h4>
+                  <h3 class="recipeTitle">{{ comment.recipe.name }}</h3>
+                  <p class="commentText">{{ comment.text }}</p>
+               </div>
+               <div class="buttonsWrapper">
+                  <a  class="edit" href="/CookIT/account/userComments/edit-{{ comment.id }}">Edytuj</a>
+                  <button class="remove" onclick="removeComment({{comment.id}})">Usuń</button>
+               </div>
+            </div>
+         {% endfor %}
+      </div>
+   </div>
+   <script src="{% static 'scripts/userComments.js' %}"></script>
+{% endblock %}

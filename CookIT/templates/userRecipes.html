@@ -1,0 +1,25 @@
+{% extends 'account.html' %} 
+
+{% block title %}Twoje przepisy - CookIT{% endblock %}
+{% load static %}
+{% block accountPageStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/userRecipes.css' %}">{% endblock %}
+
+{% block accountContent %}
+   <div class="userRecipesWrapper">
+      <div class="errorMsg">{{ validationMsg }}</div>
+      <div class="successMsg">{{ successMsg }}</div>
+      <h2 class="sectionTitile">Twoje przepisy</h2>
+      <div class="recipesWrapper">
+         {% for recipe in fetchedRecipies %}
+            <div class="recipe">
+               <h3 class="recipeTitle">{{ recipe.name }}</h3>
+               <div class="buttonsWrapper">
+                  <a  class="edit" href="/CookIT/account/userRecipes/edit-{{ recipe.id }}">Edytuj</a>
+                  <button class="remove" onclick="removeRecipe({{recipe.id}})">Usuń</button>
+               </div>
+            </div>
+         {% endfor %}
+      </div>
+   </div>
+   <script src="{% static 'scripts/userRecipes.js' %}"></script>
+{% endblock %}

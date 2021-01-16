@@ -86,6 +86,7 @@ body {
 
 #pageWrapper {
    margin: 32px 20% 0; 
+   overflow: hidden;
 }
 
 #content {
@@ -112,4 +113,61 @@ body {
 
 #footer a:hover, a:active {
    text-decoration: underline;
+}
+
+.recommendedRecipes {
+   max-width: 280px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: fixed;
+   right: 120px;
+   transition: bottom 450ms ease;
+}
+
+.recommendedTrigger {
+   padding: 6px 6px;
+   cursor: pointer;
+   color: rgb(77, 77, 77);
+   border: 1px solid rgb(221, 221, 221);
+   margin-bottom: -1px;
+   border-bottom: 1px solid white;
+   position: relative;
+   background: white;
+}
+
+.recommendedTrigger:hover {
+   color: rgb(22, 22, 22);
+}
+
+.recommendedWrapper {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   border: 1px solid rgb(221, 221, 221);
+   padding: 8px 8px;
+   background: white;
+}
+
+.recommendedList {
+   padding-left: 1.8em;
+   list-style-type: upper-roman;
+   margin: 0;
+}
+
+.recommendedRecipe {
+   padding: 8px 0;
+}
+
+.recommendedRecipeLink {
+   text-decoration: none;
+   color: rgb(0, 39, 66);
+}
+
+.recommendedRecipeLink:hover {
+   text-decoration: underline;
+}
+
+.hide {
+   opacity: 0;
 }

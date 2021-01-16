@@ -1,0 +1,117 @@
+.errorMsg {
+   margin: 0px auto;
+   font-size: 18px;
+   font-weight: 400;
+   color: rgb(206, 0, 0);
+   width: 100%;
+   text-align: center;
+}
+
+.successMsg {
+   margin: 0px auto;
+   font-size: 18px;
+   font-weight: 400;
+   color: green;
+   width: 100%;
+   text-align: center;
+}
+
+.sectionTitile {
+   font-size: 21px;
+   margin: 0;
+   padding: 28px 0 16px;
+}
+
+.editCommentWrapper {
+   margin-top: 8px;
+}
+
+.editSection {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.wrapper {
+   display: flex;
+}
+
+.leftColumn {
+   padding-right: 60px;
+   display: flex;
+   flex-direction: column;
+   -webkit-box-align: center;
+   align-items: center;
+}
+
+.leftColumnTitle {
+   margin: 0px 0px 8px;
+   font-size: 16px;
+   color: rgb(26, 26, 26);
+}
+
+.chooseRating {
+   width: 64px;
+   height: 64px;
+   font-size: 32px;
+   color: rgb(0, 39, 66);
+   border: none;
+   padding-left: 12px;
+   margin-top: 16px;
+}
+
+.chooseRating:focus {
+   outline: none;
+}
+
+.option {
+   font-size: 24px;
+   color: rgb(0, 39, 66);
+}
+
+.rightColumn {
+   padding-left: 60px;
+   border-left: 1px solid rgb(221, 221, 221);
+}
+
+.rightColumnTitle {
+   margin: 0px 0px 8px;
+   font-size: 16px;
+   color: rgb(26, 26, 26);
+}
+
+.opinion {
+   width: 280px;
+   height: 100px;
+   margin-top: 8px;
+   font-family: Montserrat;
+   color: rgb(26, 26, 26);
+   font-size: 13px;
+   line-height: 18px;
+   resize: none;
+   border: 1px solid rgb(157, 157, 157);
+}
+
+.opinion:focus {
+   outline: none;
+}
+
+.editComment {
+   color: rgb(77, 77, 77);
+   cursor: pointer;
+   text-decoration: none;
+   background: none;
+   border: none;
+   font-family: Montserrat;
+   font-size: 14px;
+   margin: 24px 0px 8px;
+   flex-basis: 100%;
+}
+
+.editComment:hover {
+   color: rgb(39, 59, 122);
+}
+
+.editComment:active, .editComment:focus {
+   border: none;
+   outline: none;
+}

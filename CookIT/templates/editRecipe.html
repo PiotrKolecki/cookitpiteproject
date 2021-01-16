@@ -1,15 +1,15 @@
 {% extends 'account.html' %} 
 
-{% block title %}Dodaj przepis - CookIT{% endblock %}
+{% block title %}Twoje przepisy - CookIT{% endblock %}
 {% load static %}
 {% block accountPageStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/addRecipe.css' %}">{% endblock %}
 
 {% block accountContent %}
-   <div class="addRecipeWrapper">
+   <div class="editRecipeWrapper">
       <div class="errorMsg">{{ validationMsg }}</div>
       <div class="successMsg">{{ successMsg }}</div>
       <span class="separator"></span>
-      <h2 class="sectionTitile">Dodaj przepis</h2>
+      <h2 class="sectionTitile">Edytuj przepis</h2>
       <button class="clearButton" onclick=clearForm()>Wyczyść formularz</button>
       <div class="categoryNameWrapper">
          <h4 class="header">Kategoria:</h4>
@@ -22,8 +22,8 @@
             <option class="option">Inne</option>
          </select>
       </div>
-      <input name="recipeName" placeholder="* Nazwa przepisu" required class="input" value="">
-      <textarea name="description" class="description" placeholder="* Opis"></textarea>
+      <input name="recipeName" placeholder="* Nazwa przepisu" required class="input" value="{{ fetchedRecipie.name }}">
+      <textarea name="description" class="description" placeholder="* Opis">{{ fetchedRecipie.description }}</textarea>
       <h4 class="header">Składniki:</h4>
       <div class="ingredientsWrapper">
       </div>
@@ -33,7 +33,12 @@
       </div>
       <button class="addInput" onclick=addNewStep()>Następny Krok</button>
       <p class="require">* Pola wymagane</p>
-      <button class="saveRecipe" onclick=addRecipe()>Zapisz przepis</button>
+      <button class="saveRecipe" onclick="editRecipe({{fetchedRecipie.id}})">Zapisz zmiany</button>
    </div>
-   <script src="{% static 'scripts/addRecipe.js' %}"></script>
+   <script>
+      var initialIngredients = "{{ fetchedRecipie.ingredients }}";
+      var initialRecipe_steps = "{{ fetchedRecipie.recipe_steps }}";
+      var initialCategory = "{{ fetchedRecipie.category_id.name }}";
+   </script>
+   <script src="{% static 'scripts/editRecipe.js' %}"></script>
 {% endblock %}
