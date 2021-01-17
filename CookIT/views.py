@@ -183,7 +183,12 @@ def addRecipePost(request):
     category = request.POST.get('category')
     fetchedCategory = models.Category.objects.get(id=categoriesDict[category])
     user_id = request.user
-    recipeImage = request.POST.get('recipeImage')
+    recipeImage = ""
+
+    print(len(request.FILES))
+
+    if(len(request.FILES) > 0):
+        recipeImage = request.FILES["recipeImage"]
 
     newRecipe = models.Recipe(
         user_id=user_id,
@@ -192,8 +197,18 @@ def addRecipePost(request):
         description=description,
         ingredients=ingredients,
         recipe_steps=steps,
-        image_file = recipeImage,
+        image_file = "",
     )
+
+    print(newRecipe.image_file)
+
+    if(recipeImage != ""):
+        image_file = 'image_'+recipeName.replace(" ", "_")+'.jpg'
+        newRecipe.image_file = image_file
+        with open('media/'+image_file, 'wb+') as destination:
+            for chunk in recipeImage.chunks():
+                destination.write(chunk)
+
     newRecipe.save()
 
     recommendedRecipes = getRecommendedRecipes()
