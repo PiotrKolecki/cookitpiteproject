@@ -66,13 +66,15 @@ def loginRegisterUI(request):
                     return render(request, 'loginRegister.html', {'successMsg': 'Konto zostało utworzone', 'recommendedRecipes': recommendedRecipes})
 
         elif request.method == "GET":
+            redirect = request.GET.get('redirect')
+            if(redirect == 'logout'):
+                return render(request, 'loginRegister.html', {'successMsg': 'Wylogowano pomyślnie', 'recommendedRecipes': recommendedRecipes})
             return render(request, 'loginRegister.html', {'recommendedRecipes': recommendedRecipes})
 
 def logoutUI(request):
     if request.user.is_authenticated:
         logout(request)
-        recommendedRecipes = getRecommendedRecipes()
-        return render(request, 'loginRegister.html', {'successMsg': 'Wylogowano pomyślnie', 'recommendedRecipes': recommendedRecipes})
+        return HttpResponseRedirect('/CookIT/login?redirect=logout')
     return HttpResponseRedirect('/CookIT/')
 
 def account(request):

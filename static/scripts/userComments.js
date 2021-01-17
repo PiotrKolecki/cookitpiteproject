@@ -25,7 +25,7 @@ const removeComment = (commentIdToRemove) => {
       }
    };
    
-   request.open("POST", window.origin + '/CookIT/userComments/remove');
+   request.open("POST", window.origin + '/CookIT/account/userComments/remove');
    request.setRequestHeader('X-CSRFToken', csrf_token);
    request.send(formData);
 }

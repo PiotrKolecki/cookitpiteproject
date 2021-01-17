@@ -18,6 +18,7 @@ urlpatterns = [
     path('account/userRecipes/edit-<int:id>', views.editRecipePage, name='editRecipePage'),
     path('account/userComments', views.userCommets, name='userCommets'),
     path('account/userComments/edit-<int:id>', views.editCommentPage, name='editCommentPage'),
+    path('account/userComments/edit/sendData', views.editCommentPost, name='editCommentPost'),
 
     path('c-<int:id>/', views.category, name='category'),
     path('r-<int:id>/', views.recipe, name='category'),
@@ -26,6 +27,5 @@ urlpatterns = [
     path('addComment/sendData', views.addRecipePost, name='addRecipePost'),
     path('userRecipes/remove', views.removeRecipe, name='removeRecipe'),
     path('account/userRecipes/edit/sendData', views.editRecipePost, name='editRecipePost'),
-    path('userComments/remove', views.removeComment, name='removeComment'),
-    path('account/userComments/edit/sendData', views.editCommentPost, name='editCommentPost'),
+    path('account/userComments/remove', views.removeComment, name='removeComment'),
 ]
