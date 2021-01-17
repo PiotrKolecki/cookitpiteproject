@@ -1,3 +1,18 @@
+const setInitialValues = () => {
+   const options = document.getElementsByClassName('option');
+
+   for (let option of options) {
+      if (Number(option.value) == initialRating) {
+         option.selected = true;
+         break;
+      }
+   }
+}
+
+window.addEventListener('load', () => {
+   setInitialValues();
+});
+
 validateForm = () => {
    const comment = document.getElementsByName('comment')[0].value;
    const validationMsg = document.getElementsByClassName('validationMsg')[0];
@@ -13,11 +28,11 @@ validateForm = () => {
    }
 }
 
-addNewComment = (recipeId) => {
+editComment = (commentId) => {
    const didPassedValidation = validateForm();
 
    if(didPassedValidation) {
-      const button = document.getElementsByClassName('addComment')[0];
+      const button = document.getElementsByClassName('editComment')[0];
       button.disabled = true;
 
       const formData = new FormData();
@@ -26,9 +41,9 @@ addNewComment = (recipeId) => {
       const rating = document.getElementsByName('rating')[0];
       const csrf_token = getCookie("csrftoken");
 
+      formData.append('commentId', commentId);
       formData.append('comment', comment.value);
       formData.append('rating', Number(rating.value));
-      formData.append('recipeId', recipeId);
       formData.append('csrfmiddlewaretoken', csrf_token);
 
       const request = new XMLHttpRequest();
@@ -41,7 +56,7 @@ addNewComment = (recipeId) => {
          }
       };
       
-      request.open("POST", window.origin + '/CookIT/addComment/');
+      request.open("POST", window.origin + '/CookIT/account/userComments/edit/sendData');
       request.setRequestHeader('X-CSRFToken', csrf_token);
       request.send(formData);
    }

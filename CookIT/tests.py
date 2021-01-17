@@ -9,35 +9,79 @@ from http.cookies import SimpleCookie
 from django.test import Client
 from django.contrib.auth.models import User
 
-class HomePageTest(SimpleTestCase):
-   def test_home_page(self):
-      response = self.client.get('/CookIT/')
-      self.assertEqual(response.status_code, 200)
-      self.assertTemplateUsed(response, 'home.html')
+###############
+# Pages tests #
+###############
+
+class HomePageRootRedirectTest(TestCase):
+    def test_root_redirect_home_page(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/CookIT/')
+
+class HomePageTest(TestCase):
+    def test_home_page(self):
+        response = self.client.get('/CookIT/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'home.html')
+
+class LoginPageTest(TestCase):
+    def test_login_page(self):
+        response = self.client.get('/CookIT/login/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'loginRegister.html')
+
+class LogoutPageTest(TestCase):
+    def test_logout_page(self):
+        response = self.client.get('/CookIT/logout/')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/CookIT/')
 
 class AccountPageTest(SimpleTestCase):
-   def test_user_without_cookie(self):
-      self.client.cookies = SimpleCookie({})
-      response = self.client.get('/CookIT/account/')
-      self.assertEqual(response.status_code, 302)
-      self.assertEqual(response.url, '/CookIT/login')
+    def test_user_without_cookie(self):
+        self.client.cookies = SimpleCookie({})
+        response = self.client.get('/CookIT/account/')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/CookIT/login')
+
+########################
+# Authentication tests #
+########################
+
+class LoginLogoutTest(TestCase):
+    def test_user_with_cookie(self):
+        self.client.cookies = SimpleCookie({'userSession': 'testCookie'})
+        user = User.objects.create_user(username="test", password="test")
+        user.save()
+        self.client.login(username='test', password='test')
+        self.assertIn('_auth_user_id', self.client.session)
+        response = self.client.get('/CookIT/logout/')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/CookIT/login?redirect=logout')
+        self.assertNotIn('_auth_user_id', self.client.session)
+        user.delete()
 
 class AccountPageTestAuthenticated(TestCase):
-   def test_user_with_cookie(self):
-      self.client.cookies = SimpleCookie({'userSession': 'testCookie'})
-      user = User.objects.create_user(username="test", password="test")
-      user.save()
-      self.client.login(username='test', password='test')
-      response = self.client.get('/CookIT/account/')
-      self.assertEqual(response.status_code, 200)
-      self.assertTemplateUsed(response, 'userIdentity.html')
+    def test_user_with_cookie(self):
+        self.client.cookies = SimpleCookie({'userSession': 'testCookie'})
+        user = User.objects.create_user(username="test", password="test")
+        user.save()
+        self.client.login(username='test', password='test')
+        response = self.client.get('/CookIT/account/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'userIdentity.html')
+        user.delete()
+
+###############
+# Model tests #
+###############
 
 class CategoryTest(TestCase):
     def setUp(self):
         self.category = Category(name="Test name")
         self.category.description = "Test description"
         self.category.save()
-        
+
     def test_create_category(self):
         new_category = Category.objects.get(name="Test name")
         self.assertEqual(new_category.name, "Test name")
@@ -50,14 +94,13 @@ class RecipeTest(TestCase):
         self.recipe.ingredients = "Test ingredients"
         self.recipe.recipe_steps = "Test recipe steps"
         self.recipe.save()
-        
+
     def test_create_recipe(self):
         new_recipe = Recipe.objects.get(name="Test name")
         self.assertEqual(new_recipe.name, "Test name")
         self.assertEqual(new_recipe.description, "Test description")
         self.assertEqual(new_recipe.ingredients, "Test ingredients")
         self.assertEqual(new_recipe.recipe_steps, "Test recipe steps")
-        
         
 class CommentTest(TestCase):
     def setUp(self):
@@ -95,6 +138,3 @@ class ValidationTest(TestCase):
         self.recipe = Recipe(name="test")
         self.comment = Comment(recipe = self.recipe, rating = "bad type")
         self.assertRaises(ValidationError,  self.comment.full_clean)
-        
-      
-        

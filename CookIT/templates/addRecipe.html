@@ -1,0 +1,39 @@
+{% extends 'account.html' %} 
+
+{% block title %}Dodaj przepis - CookIT{% endblock %}
+{% load static %}
+{% block accountPageStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/addRecipe.css' %}">{% endblock %}
+
+{% block accountContent %}
+   <div class="addRecipeWrapper">
+      <div class="errorMsg">{{ validationMsg }}</div>
+      <div class="successMsg">{{ successMsg }}</div>
+      <span class="separator"></span>
+      <h2 class="sectionTitile">Dodaj przepis</h2>
+      <button class="clearButton" onclick=clearForm()>Wyczyść formularz</button>
+      <div class="categoryNameWrapper">
+         <h4 class="header">Kategoria:</h4>
+         <select name="category" class="chooseCategory">
+            <option class="option">Śniadanie</option>
+            <option class="option">Obiad</option>
+            <option class="option">Kolacja</option>
+            <option class="option">Deser</option>
+            <option class="option">Przekąska</option>
+            <option class="option">Inne</option>
+         </select>
+      </div>
+      <input name="recipeName" placeholder="* Nazwa przepisu" required class="input" value="">
+      <textarea name="description" class="description" placeholder="* Opis"></textarea>
+      <h4 class="header">Składniki:</h4>
+      <div class="ingredientsWrapper">
+      </div>
+      <button class="addInput" onclick=addNewIngredient()>Dodaj składnik</button>
+      <h4 class="header">Kroki:</h4>
+      <div class="stepsWrapper">
+      </div>
+      <button class="addInput" onclick=addNewStep()>Następny Krok</button>
+      <p class="require">* Pola wymagane</p>
+      <button class="saveRecipe" onclick=addRecipe()>Zapisz przepis</button>
+   </div>
+   <script src="{% static 'scripts/addRecipe.js' %}"></script>
+{% endblock %}

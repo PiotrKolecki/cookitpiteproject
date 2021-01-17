@@ -1,0 +1,94 @@
+.errorMsg {
+   margin: 0px auto;
+   font-size: 18px;
+   font-weight: 400;
+   color: rgb(206, 0, 0);
+   width: 100%;
+   text-align: center;
+}
+
+.successMsg {
+   margin: 0px auto;
+   font-size: 18px;
+   font-weight: 400;
+   color: green;
+   width: 100%;
+   text-align: center;
+}
+
+.sectionTitile {
+   font-size: 21px;
+   margin: 0;
+   padding: 28px 0 16px;
+}
+
+.comment {
+   display: flex;
+   align-items: center;
+   padding: 12px 16px;
+   margin-bottom: 12px;
+   justify-content: space-between;
+   max-width: 420px;
+}
+
+.comment:hover {
+   box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 2px 1px, rgba(0, 0, 0, 0.16) 0px 4px 8px 0px;
+}
+
+.comment:hover .edit {
+   opacity: 1;
+}
+
+.comment:hover .remove {
+   opacity: 1;
+}
+
+.comment:hover .commentRating {
+   color: rgb(0, 39, 66);
+}
+
+.comment:hover .commentText {
+   color: rgb(0, 39, 66);
+}
+
+.commentRating {
+   margin: 8px 0;
+   font-size: 18px;
+}
+
+.commentText {
+   margin: 8px 0;
+   font-size: 14px;
+}
+
+.recipeTitle {
+   margin: 0;
+   font-size: 18px;
+   padding-right: 24px;
+}
+
+.buttonsWrapper {
+   display: flex;
+   align-self: flex-start;
+   margin-top: 12px;
+   margin-right: 6px;
+}
+
+.edit, .remove {
+   font-size: 14px;
+   cursor: pointer;
+   background: none;
+   text-decoration: none !important;
+   border: none;
+   color: rgb(77, 77, 77);
+   opacity: 0;
+}
+
+.edit {
+   margin-right: 8px;
+}
+
+.edit:hover, .remove:hover, .edit:active, .remove:active, .remove:focus {
+   color: rgb(22, 22, 22);
+   outline: none;
+}

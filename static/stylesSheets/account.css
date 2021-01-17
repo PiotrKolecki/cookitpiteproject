@@ -1,13 +1,14 @@
 #account {
    display: flex;
    margin-bottom: 32px;
+   width: 100%;
 }
 
 .sidebar {
    display: flex;
    flex-direction: column;
    border-right: 1px solid rgb(221, 221, 221);
-   min-width: 180px;
+   min-width: 200px;
    padding-top: 16px;
 }
 

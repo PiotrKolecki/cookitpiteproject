@@ -12,11 +12,16 @@
 <body>
     <div id="topBar">
         <div class="logoLoginWrapper">
-            <!-- FIXME: Change to proper link-->
             <a href="/CookIT"><img width=72 height=72 src="{% static 'images/logo.png' %}" /></a>
             <h2 class="pageTitle">CookIT</h2>
-            <!-- Correct buttons will be displayed after page load -->
-            <div class="navButtonsWrapper"></div>
+            <div class="navButtonsWrapper">
+                {% if user.is_authenticated %}
+                <a class="accountButton" href="/CookIT/account">Twoje konto</a>
+                <a class="accountButton" href="/CookIT/logout">Wyloguj</a>
+                {% else %}
+                <a class="loginButton" href="/CookIT/login/">Zaloguj się</a>
+                {% endif %}
+            </div>
         </div>
         <div class="navWrapper">
             <a class="navLink" href="/CookIT/c-1">
@@ -63,7 +68,23 @@
                 <a href="https://github.com/pasik97" target="_blank">Konrad Pasik</a>
             </div>
         </div>
+
+        <div class="recommendedRecipes hide">
+            <div class="recommendedTrigger" onclick=toggleRecommended()>POLECANE</div>
+            <div class="recommendedWrapper">
+                <ol class="recommendedList">
+                    {% for recipe in recommendedRecipes %}
+                        <li class="recommendedRecipe">
+                            <a class="recommendedRecipeLink" href="/CookIT/r-{{ recipe.id }}">
+                                {{ recipe.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+        
     </div>
-    <script src="{% static 'scripts/topBarButtons.js' %}"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
 </body>
 </html>

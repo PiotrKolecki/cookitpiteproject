@@ -12,10 +12,20 @@ urlpatterns = [
     path('logout/', views.logoutUI, name='logout'),
 
     path('account/', views.account, name='account'),
-    path('account/edit', views.accountEdit, name='accountEdit'),
+    path('account/identityEdit', views.accountEdit, name='accountEdit'),
+    path('account/addRecipe', views.addRecipePage, name='addRecipePage'),
+    path('account/userRecipes', views.userRecipes, name='userRecipes'),
+    path('account/userRecipes/edit-<int:id>', views.editRecipePage, name='editRecipePage'),
+    path('account/userComments', views.userCommets, name='userCommets'),
+    path('account/userComments/edit-<int:id>', views.editCommentPage, name='editCommentPage'),
+    path('account/userComments/edit/sendData', views.editCommentPost, name='editCommentPost'),
 
     path('c-<int:id>/', views.category, name='category'),
     path('r-<int:id>/', views.recipe, name='category'),
 
     path('addComment/', views.addComment, name='addComment'),
+    path('addComment/sendData', views.addRecipePost, name='addRecipePost'),
+    path('account/userRecipes/remove', views.removeRecipe, name='removeRecipe'),
+    path('account/userRecipes/edit/sendData', views.editRecipePost, name='editRecipePost'),
+    path('account/userComments/remove', views.removeComment, name='removeComment'),
 ]
