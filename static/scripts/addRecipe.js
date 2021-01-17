@@ -163,13 +163,16 @@ addRecipe = () => {
       const ingredientsValue = ingredients.join('|');
       const stepsValue = steps.join('|');
       const csrf_token = getCookie("csrftoken");
-
+	  const recipeImage = document.getElementsByName('recipeImage')[0].value;
+	  
+	  
       formData.append('category', category);
       formData.append('recipeName', recipeName);
       formData.append('description', description);
       formData.append('ingredients', ingredientsValue);
       formData.append('steps', stepsValue);
       formData.append('csrfmiddlewaretoken', csrf_token);
+	  formData.append('recipeImage', recipeImage);
 
       const request = new XMLHttpRequest();
 

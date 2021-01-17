@@ -183,6 +183,7 @@ def addRecipePost(request):
     category = request.POST.get('category')
     fetchedCategory = models.Category.objects.get(id=categoriesDict[category])
     user_id = request.user
+    recipeImage = request.POST.get('recipeImage')
 
     newRecipe = models.Recipe(
         user_id=user_id,
@@ -191,6 +192,7 @@ def addRecipePost(request):
         description=description,
         ingredients=ingredients,
         recipe_steps=steps,
+        image_file = recipeImage,
     )
     newRecipe.save()
 
