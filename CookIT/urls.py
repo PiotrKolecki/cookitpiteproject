@@ -25,7 +25,7 @@ urlpatterns = [
 
     path('addComment/', views.addComment, name='addComment'),
     path('addComment/sendData', views.addRecipePost, name='addRecipePost'),
-    path('userRecipes/remove', views.removeRecipe, name='removeRecipe'),
+    path('account/userRecipes/remove', views.removeRecipe, name='removeRecipe'),
     path('account/userRecipes/edit/sendData', views.editRecipePost, name='editRecipePost'),
     path('account/userComments/remove', views.removeComment, name='removeComment'),
 ]

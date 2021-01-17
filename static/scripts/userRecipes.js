@@ -25,7 +25,7 @@ const removeRecipe = (recipeIdToRemove) => {
       }
    };
    
-   request.open("POST", window.origin + '/CookIT/userRecipes/remove');
+   request.open("POST", window.origin + '/CookIT/account/userRecipes/remove');
    request.setRequestHeader('X-CSRFToken', csrf_token);
    request.send(formData);
 }
