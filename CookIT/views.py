@@ -185,8 +185,6 @@ def addRecipePost(request):
     user_id = request.user
     recipeImage = ""
 
-    print(len(request.FILES))
-
     if(len(request.FILES) > 0):
         recipeImage = request.FILES["recipeImage"]
 
@@ -278,7 +276,7 @@ def editRecipePost(request):
     
     recommendedRecipes = getRecommendedRecipes()
 
-    return render(request, 'editRecipe.html', { 'fetchedRecipie': fetchedRecipie, 'recommendedRecipes': recommendedRecipes })
+    return render(request, 'editRecipe.html', { 'successMsg': 'Zapisano zmiany', 'fetchedRecipie': fetchedRecipie, 'recommendedRecipes': recommendedRecipes })
 
 def userCommets(request):
     if request.user.is_authenticated:
