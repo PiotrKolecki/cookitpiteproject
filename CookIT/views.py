@@ -271,6 +271,10 @@ def editRecipePost(request):
     recipeImage = ""
     image_file = ""
 
+    fetchedRecipie = models.Recipe.objects.get(id=recipeId)
+    if(fetchedRecipie.image_file):
+        image_file = fetchedRecipie.image_file
+
     if(len(request.FILES) > 0):
         recipeImage = request.FILES["recipeImage"]
 
@@ -289,8 +293,6 @@ def editRecipePost(request):
         recipe_steps=steps,
         image_file=image_file,
     )
-
-    fetchedRecipie = models.Recipe.objects.get(id=recipeId)
     
     recommendedRecipes = getRecommendedRecipes()
 
