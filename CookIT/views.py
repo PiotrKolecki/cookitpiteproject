@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from . import models
+import os
 
 import logging
 import random 
@@ -198,17 +199,17 @@ def addRecipePost(request):
         image_file = "",
     )
 
-    print(newRecipe.image_file)
+    newRecipe.save()
 
     if(recipeImage != ""):
-        image_file = 'image_'+recipeName.replace(" ", "_")+'.jpg'
+        recipeImageExtension = os.path.splitext(str(recipeImage))[1]
+        image_file = f"image_{newRecipe.id}{recipeImageExtension}"
         newRecipe.image_file = image_file
         with open('media/'+image_file, 'wb+') as destination:
             for chunk in recipeImage.chunks():
                 destination.write(chunk)
-
+    
     newRecipe.save()
-
     recommendedRecipes = getRecommendedRecipes()
     return render(request, 'addRecipe.html', {'successMsg': 'Przepis został zapisany', 'recommendedRecipes': recommendedRecipes})
 
@@ -227,7 +228,11 @@ def removeRecipe(request):
     recipeId = request.POST.get('recipeIdToRemove')
 
     models.Comment.objects.filter(recipe_id=recipeId).delete()
-    models.Recipe.objects.get(id=recipeId).delete()
+    recipe = models.Recipe.objects.get(id=recipeId)
+    path = os.path.join("media", str(recipe.image_file))
+    if os.path.exists(path):
+        os.remove(path)
+    recipe.delete()
 
     user_id = request.user
     fetchedRecipies = models.Recipe.objects.all().filter(user_id=user_id)
@@ -263,6 +268,18 @@ def editRecipePost(request):
     steps = request.POST.get('steps')
     category = request.POST.get('category')
     fetchedCategory = models.Category.objects.get(id=categoriesDict[category])
+    recipeImage = ""
+    image_file = ""
+
+    if(len(request.FILES) > 0):
+        recipeImage = request.FILES["recipeImage"]
+
+    if(recipeImage != ""):
+        recipeImageExtension = os.path.splitext(str(recipeImage))[1]
+        image_file = f"image_{recipeId}{recipeImageExtension}"
+        with open('media/'+image_file, 'wb+') as destination:
+            for chunk in recipeImage.chunks():
+                destination.write(chunk)
 
     models.Recipe.objects.filter(id=recipeId).update(
         category_id=fetchedCategory,
@@ -270,6 +287,7 @@ def editRecipePost(request):
         description=description,
         ingredients=ingredients,
         recipe_steps=steps,
+        image_file=image_file,
     )
 
     fetchedRecipie = models.Recipe.objects.get(id=recipeId)

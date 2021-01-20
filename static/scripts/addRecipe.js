@@ -174,8 +174,8 @@ addRecipe = () => {
       formData.append('description', description);
       formData.append('ingredients', ingredientsValue);
       formData.append('steps', stepsValue);
+      formData.append('recipeImage', recipeImage);
       formData.append('csrfmiddlewaretoken', csrf_token);
-	   formData.append('recipeImage', recipeImage);
 
       const request = new XMLHttpRequest();
 
