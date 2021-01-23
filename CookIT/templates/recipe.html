@@ -6,6 +6,11 @@
 {% block additionalStylesSheet %}<link rel="stylesheet" href="{% static 'stylesSheets/recipe.css' %}">{% endblock %}
 
 {% block content %}
+    {% if fetchedRecipie.image_file %}
+    <div class="recipeImageWrapper"></div>
+        <img src="{{fetchedRecipie.image_file.url}}" class="recipieImage">
+    </div>
+    {% endif %}
     <div id="recipeWrapper">
       <h2 class="recipeTitle">{{ fetchedRecipie.name }}</h2>
       <p class="recipeDescription">{{ fetchedRecipie.description }}</p>

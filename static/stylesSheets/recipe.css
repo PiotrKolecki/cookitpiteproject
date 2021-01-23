@@ -8,6 +8,16 @@
    margin: 16px 0px 16px 24px;
 }
 
+.recipeImageWrapper {
+   margin: 0px 0px 16px 24px;
+}
+
+.recipieImage {
+   object-fit: cover;
+   width: 100%;
+   height: auto;
+}
+
 .recipeDescription {
    margin: 0px 0px 48px 24px;
    color: rgb(26, 26, 26);

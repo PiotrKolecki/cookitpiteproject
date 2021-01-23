@@ -54,6 +54,15 @@
    margin-bottom: 16px;
 }
 
+.recipeImageWrapper {
+   margin: 0px 0px 16px 24px;
+}
+
+.recipieImage {
+   max-width:50%;
+   max-height:50%;
+}
+
 .require {
    font-size: 13px;
    padding: 4px 0;

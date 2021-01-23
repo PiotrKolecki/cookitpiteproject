@@ -23,6 +23,14 @@
          </select>
       </div>
       <input name="recipeName" placeholder="* Nazwa przepisu" required class="input" value="{{ fetchedRecipie.name }}">
+      <h4 class="header">Zdjęcie:</h4>
+      {% if fetchedRecipie.image_file %}
+      <div class="recipeImageWrapper"></div>
+         <img src="{{fetchedRecipie.image_file.url}}" class="recipieImage">
+      </div>
+      {% endif %}
+      <input name="recipeImage" type="file" accept="image/*">
+      <h4 class="header">Opis:</h4>
       <textarea name="description" class="description" placeholder="* Opis">{{ fetchedRecipie.description }}</textarea>
       <h4 class="header">Składniki:</h4>
       <div class="ingredientsWrapper">
